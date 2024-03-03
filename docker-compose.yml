@@ -4,8 +4,8 @@ services:
   api:
     build:
       context: ./api
-    expose:
-      - "3000"
+    ports:
+      - "3000:3000"
     restart: unless-stopped
 
   db:
@@ -30,4 +30,3 @@ services:
     depends_on:
       - api
     restart: unless-stopped
-
