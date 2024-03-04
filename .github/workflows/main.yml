@@ -15,22 +15,21 @@ jobs:
         command: ["dockerd-entrypoint.sh"]
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Docker Compose
-      run: |
-        sudo service docker start
-        sudo docker-compose build
-        sudo docker-compose up -d
-        sudo docker-compose ps
-        sudo docker-compose logs -f api
-    - name: Wait for services to start
-      run: sleep 30
+      - name: Set up Docker Compose
+        run: |
+          sudo service docker start
+          sudo docker-compose build
+          sudo docker-compose up -d
+          sudo docker-compose ps
+          sudo docker-compose logs -f api
+      - name: Wait for services to start
+        run: sleep 30
 
-    - name: Run fake tests
-      run: |
-        echo "Running fake tests..."
-
-    - name: Tear down Docker Compose
-      run: sudo docker-compose down
+      - name: Run fake tests
+        run: |
+          echo "Running fake tests..."
+      - name: Tear down Docker Compose
+        run: sudo docker-compose down
