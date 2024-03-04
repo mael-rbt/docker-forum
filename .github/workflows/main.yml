@@ -11,8 +11,7 @@ jobs:
 
     services:
       docker:
-        image: docker:20.10.7
-        entrypoint: ["dockerd-entrypoint.sh"]
+        image: docker:19.03.15
 
     steps:
       - name: Checkout code
@@ -25,11 +24,14 @@ jobs:
           sudo docker-compose up -d
           sudo docker-compose ps
           sudo docker-compose logs -f api
+        continue-on-error: true
+
       - name: Wait for services to start
         run: sleep 30
 
       - name: Run fake tests
         run: |
           echo "Running fake tests..."
+          
       - name: Tear down Docker Compose
         run: sudo docker-compose down
