@@ -22,22 +22,11 @@ jobs:
           sudo service docker start
           sudo docker-compose build
           sudo docker-compose up -d
-          sudo docker-compose ps
-          sudo docker-compose logs -f api
         continue-on-error: true
-
-      - name: Show Docker Compose ps
-        run: sudo docker-compose ps
-
-      - name: Wait for services to start
-        run: sleep 1
 
       - name: Show Docker Compose logs
         run: sudo docker-compose logs
 
-      - name: Run fake tests
+      - name: Run SQL Test
         run: |
-          echo "Running fake tests..."
-          
-      - name: Tear down Docker Compose
-        run: sudo docker-compose down
+          sudo docker-compose exec sender sh -c "echo 'INSERT INTO messages (author, content) VALUES ('Admin', 'Hello World!');' | psql -U myforumuser -h db myforumdb"
