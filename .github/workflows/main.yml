@@ -26,8 +26,14 @@ jobs:
           sudo docker-compose logs -f api
         continue-on-error: true
 
+      - name: Show Docker Compose ps
+        run: sudo docker-compose ps
+
       - name: Wait for services to start
-        run: sleep 30
+        run: sleep 1
+
+      - name: Show Docker Compose logs
+        run: sudo docker-compose logs
 
       - name: Run fake tests
         run: |
