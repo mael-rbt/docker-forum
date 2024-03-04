@@ -29,4 +29,4 @@ jobs:
 
       - name: Run SQL Test
         run: |
-          sudo docker-compose exec sender sh -c "echo 'INSERT INTO messages (author, content) VALUES ('Admin', 'Hello World!');' | psql -U myforumuser -h db myforumdb"
+          sudo docker-compose exec sender sh -c "echo \"INSERT INTO messages (author, content) VALUES ('Admin', 'Hello World!');\" | psql -U myforumuser -h db myforumdb"
