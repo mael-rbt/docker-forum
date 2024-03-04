@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Exposez le port sur lequel le service Thread fonctionnera
-EXPOSE 80
+EXPOSE 8081
 
 # Commande pour exécuter l'application
 CMD ["node", "app.js"]

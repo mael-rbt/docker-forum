@@ -6,9 +6,10 @@ const app = express();
 const port = 8080;
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); // Add this line to parse URL-encoded bodies
 
 // Endpoint pour créer un message via l'API
-app.post('/write', async (req, res) => {
+app.post('/', async (req, res) => {
   const { author, content } = req.body;
 
   if (!author || !content) {
@@ -22,6 +23,20 @@ app.post('/write', async (req, res) => {
     console.error('Error writing message via API:', error.message);
     res.status(500).json({ error: 'Internal Server Error' });
   }
+});
+
+// Endpoint pour afficher le formulaire
+app.get('/form', (req, res) => {
+  res.send(`
+    <form action="/write" method="post">
+      <label for="author">Author:</label>
+      <input type="text" id="author" name="author" required><br>
+      <label for="content">Content:</label>
+      <textarea id="content" name="content" required></textarea><br>
+      <input type="submit" value="Submit">
+    </form>
+<a href="http://185.193.17.146:3000/messages">Liste des messages</a>
+  `);
 });
 
 // Start the server
